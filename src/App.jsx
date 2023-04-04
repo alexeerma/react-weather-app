@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './index.css';
+import axios from 'axios';
 
 function App() {
   const [city, setCity] = useState('');
@@ -7,11 +8,11 @@ function App() {
   
   const API_KEY = 'ca5c4991c00b244edf4a88fa6d522468';
     
-    const searchWeather = async (e) => {
-      e.preventDefault();
-      
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-      const data = await response.json();
+  const searchWeather = async (e) => {
+    e.preventDefault();
+    
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    const data = response.data;
     
     setWeather({
       temperature: data.main.temp,
